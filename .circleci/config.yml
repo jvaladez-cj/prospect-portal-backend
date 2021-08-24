@@ -11,13 +11,14 @@ executors:
     resource_class: small
 
 workflows:
-  sample:
-    jobs:
-      generate-release:
-      executor:
-        name: node
-        - node/test:
-          version: '15.1'
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
+  generate-release:
+    executor:
+      name: node
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: Install dependencies
+          command: apk add --no-cache git
+      - run:
+          command: npm run generate-release
