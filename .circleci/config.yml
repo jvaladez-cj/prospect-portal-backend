@@ -4,6 +4,12 @@ version: 2.1
 orbs:
   node: circleci/node@4.1
 
+executors:
+  node:
+    docker:
+      - image: node:lts-alpine
+    resource_class: small
+
 workflows:
   sample:
     jobs:
