@@ -3,26 +3,10 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.1
-  executors:
-  node:
-    docker:
-      - image: node:lts-alpine
-    resource_class: small
 
 workflows:
   sample:
     jobs:
-    generate-release:
-    executor:
-      name: node
-    steps:
-      - checkout
-      - node/install-packages
-      - run:
-          name: Install dependencies
-          command: apk add --no-cache git
-      - run:
-          command: npm run generate-release
       - node/test:
           version: '15.1'
           # This is the node version to use for the `cimg/node` tag
